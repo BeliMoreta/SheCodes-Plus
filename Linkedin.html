@@ -55,40 +55,7 @@ h1 {
 </section> 
 <script>
 
-let now = new Date();
 
-    let h4 = document.querySelector("h4");
-    let h5 = document.querySelector("h5")
-
-    let date = now.getDate();
-    let hours = now.getHours();
-    let minutes = now.getMinutes();
-    let year = now.getFullYear();
-
-
-    let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
-    let day = days[now.getDay()]; 
-
-    let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Aug", "Sep", "Oct", "Nov", "Dec"]
-    let month = months[now.getMonth()]; 
-
-    h4.innerHTML = `<hr> ${day} | ${month}  ${date} | ${hours}:${minutes}
-            <hr>`;
-
-    h5.innerHTML = `${day} <br> ☁ <br> 4°/-8° <br> <br>`
-
-function search(event) {
-    event.preventDefault();
-    let searchInput = document.querySelector("#search-text-input");
-    
-    let h3 = document.querySelector("h3");
-    h3.innerHTML = `<br> ${searchInput.value}`;
-}
-
-    let form = document.querySelector("#search-form");
-
-    form.addEventListener("submit", search);
- 
 
 </script>        
 </body>
