@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+  <link
+    rel="stylesheet"
+    href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+    crossorigin="anonymous"
+  />
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <title>Weather App</title>
+    <style>
+      h1 {
+        display: block;
+        text-align: center;
+        font-weight: bolder;
+        color: aliceblue;
+        font-family: "Chivo", sans-serif;
+        border: rgb(97, 93, 93) 1px solid;
+        max-width: 300px;
+        border-radius: 10px;
+        margin: 0 auto;
+        padding-top: 60px;
+        padding-bottom: 1px;
+        background-image: url(https://images.pexels.com/photos/4203094/pexels-photo-4203094.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500);
+      }
+      
+      h2 {
+        display: block;
+        text-align: center;
+        font-weight: lighter;
+        font-family: "Chivo", sans-serif;
+        font-size: 20px;
+        padding-top: 20px;
+        padding-bottom: 1px;
+        max-width: 350px;
+        margin: 0 auto;
+        color: rgb(32, 32, 32);
+        border: rgb(97, 93, 93) 1px solid;
+        background-color: rgb(157, 185, 216);
+        border-radius: 10px;
+      }
+      ul {
+        list-style-type: none;
+        text-align: left;
+      }
+      
+      h3 {
+        text-align: center;
+        font-family: "Chivo", sans-serif;
+        color: rgb(68, 65, 65);
+        font-weight: bolder;
+      }
+
+      h4 {
+        text-align: center;
+        font-family: "Chivo", sans-serif;
+        color: rgb(68, 65, 65);
+        font-weight: bolder;
+      }
+
+      h5 {
+        text-align: center;
+        font-family: "Chivo", sans-serif;
+        color: rgb(0, 0, 0);
+      }
+      .minMax {
+        text-align: center;
+        font-family: "Chivo", sans-serif;
+        color: rgb(0, 0, 0);
+      }
+
+      input {
+        max-width: 450px;
+        margin: 0 auto;
+        color: rgb(0, 0, 0);
+        font-family: "Chivo", sans-serif;
+        border: rgb(97, 93, 93) 1px solid;
+        background-color: rgb(255, 255, 255);
+        border-radius: 10px;
+        font-weight: 200;
+        font-size: 20px;
+      }
+
+      .icono {
+        font-size: 70px;
+      }
+      .app {
+        display: block;
+        text-align: center;
+        padding: 10px 0;
+        max-width: 500px;
+        margin: 0 auto;
+        border: rgb(97, 93, 93) 5px solid;
+        background-image: linear-gradient(to top, #accbee 0%, #e7f0fd 100%);
+        border-radius: 10px;
+      }
+
+      hr {
+        max-width: 450px;
+      }
+
+      .col {
+        font-size: 20px;
+        padding-bottom: 20px;
+        font-family: "Chivo", sans-serif;
+      }
+
+      .searcher {
+        text-align: center;
+        color: rgb(0, 0, 0);
+        margin: 0%;
+        size: 10px;
+        font-family: "Chivo", sans-serif;
+      }
+      button {
+        display: block;
+        text-align: center;
+        margin: 20px auto;
+        padding: 10px;
+        color: rgb(255, 255, 255);
+        font-family: "Chivo", sans-serif;
+        border: rgb(97, 93, 93) 1px solid;
+        background-color: rgb(10, 44, 138);
+        border-radius: 50px;
+        font-weight: 200;
+        font-size: 20px;
+      }
+      .description {
+        text-transform: capitalize;
+      }
+    </style>
+  </head>
+  <body>
+    <section>
+      <div class="app 1">
+        <form id="search-form">
+          <input
+            type="text"
+            placeholder="Search for a city"
+            autocomplete="off"
+            autofocus="on"
+            id="search-text-input"
+          />
+          <input type="submit" value="Search" />
+        </form>
+        
+        <button 
+        id="currentButton">Current location
+      </button>
+
+        <h1>
+          <div class="degrees">
+            <span class="temperature" id="temperature">3°C</span>
+          </div>
+          <br />
+          <span class="description" id="temperature-description">Cloudy</span>
+          <div class="icono">
+            ☁
+            <br />
+            <br />
+          </div>
+        </h1>
+
+        <br />
+        <br />
+
+        <h2>
+          <div class="details">
+            <ul>
+              <li><b>Feels like: </b><span id="feels"></span>°C</li>
+              <li><b>Wind: </b><span id="wind"> </span> km/h</li>
+              <li><b>Humidity: </b><span id="humidity"></span>%</li>
+              <li><b>Pressure: </b><span id="pressure"> </span> Pa%</li>
+            </ul>
+          </div>
+        </h2>
+
+        <h3>
+          <br />
+          <span class="city" id="city">Madrid</span>
+        </h3>
+
+        <h4>
+          <hr />
+          Sunday | Jan 10 | 21:03
+          <hr />
+        </h4>
+
+        <h5>
+          Mon
+          <br />
+          ☁
+          <br />
+        </h5>
+         
+        <div class="minMax">
+          <tr>
+            <td>4°<span id="min"></span></td>
+            <td>-8°<span id="max"></span></td>
+        </tr>
+        </div>
+         
+        <br>
+      
+        <div class="row 3">
+          <div class="col 7">
+            Mon
+            <br />
+            ☁
+            <br />
+            4°/-8°
+          </div>
+          <div class="col 8">
+            Tue
+            <br />
+            ⛅
+            <br />
+            4°/-11°
+          </div>
+          <div class="col 9">
+            Wed
+            <br />
+            ⛅
+            <br />
+            6°/2°
+          </div>
+          <div class="col 10">
+            Thu
+            <br />
+            ☁
+            <br />
+            7°/0
+          </div>
+          <div class="col 11">
+            Fri
+            <br />
+            ☁
+            <br />
+            5°/-1°
+          </div>
+        </div>
+      </div>
+    </section>
+<script>
+let now = new Date();
+
+  let h4 = document.querySelector("h4");
+  let h5 = document.querySelector("h5");
+
+  let date = now.getDate();
+  let hours = now.getHours();
+  let minutes = now.getMinutes();
+  let year = now.getFullYear();
+
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
+  let day = days[now.getDay()];
+
+  let months = [
+      "Jan",
+      "Feb",
+      "Mar",
+      "Apr",
+      "May",
+      "Jun",
+      "Aug",
+      "Sep",
+      "Oct",
+      "Nov",
+      "Dec"
+];
+    let month = months[now.getMonth()];
+
+    h4.innerHTML = `<hr> ${day} | ${month}  ${date} | ${hours}:${minutes}
+            <hr>`;
+
+    h5.innerHTML = `${day} <br> ☁ <br>`;
+
+function search(event) {
+    event.preventDefault();
+    let searchInput = document.querySelector("#search-text-input");
+
+    let h3 = document.querySelector("h3");
+    h3.innerHTML = `<br> ${searchInput.value}`;
+
+    searchCity(searchInput.value);
+}
+
+function searchCity(city) {
+  let apiKey = "829fcd3105a3bc78b07b8b3c45973e5b";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric`;
+  axios.get(`${apiUrl}&appid=${apiKey}`).then(showTemperature);
+}
+
+searchCity("Madrid")
+
+let form = document.querySelector("#search-form");
+form.addEventListener("submit", search);
+
+
+
+//Api
+
+function showTemperature(response) {
+  console.log(response.data);
+  let h3 = document.querySelector("h3");
+  let temperature = Math.round(response.data.main.temp);
+  let temperatureElement = document.querySelector("#temperature");
+  let description = document.querySelector("#temperature-description");
+  let feels = Math.round(response.data.main.feels_like);
+  let feelsElement = document.querySelector("#feels");
+  let wind = Math.round(response.data.wind.speed);
+  let windElement = document.querySelector("#wind");
+  let humidity = Math.round(response.data.main.humidity);
+  let humidityElement = document.querySelector("#humidity");
+  let pressure = Math.round(response.data.main.pressure);
+  let pressureElement = document.querySelector("#pressure");
+  h3.innerHTML = response.data.name;
+  pressureElement.innerHTML = `${pressure}`;
+  humidityElement.innerHTML = `${humidity}`;
+  windElement.innerHTML = `${wind}`;
+  feelsElement.innerHTML = `${feels}`;
+  temperatureElement.innerHTML = `${temperature}°C`;
+  description.innerHTML = response.data.weather[0].description;
+}
+
+ function searchLocation(position) {
+  let apiKey = "829fcd3105a3bc78b07b8b3c45973e5b";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${
+    position.coords.latitude
+  }&lon=${position.coords.longitude}&appid=${apiKey}&units=metric`;
+
+  axios.get(apiUrl).then(showTemperature);
+}
+
+function getCurrentLocation(event){
+event.preventDefault();
+navigator.geolocation.getCurrentPosition(searchLocation);
+}
+
+let currentLocationButton = document.querySelector("#currentButton");
+currentLocationButton.addEventListener("click", getCurrentLocation);
+
+
+    </script>
+  </body>
+</html>
