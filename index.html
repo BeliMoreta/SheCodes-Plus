@@ -266,6 +266,9 @@ let now = new Date();
   let date = now.getDate();
   let hours = now.getHours();
   let minutes = now.getMinutes();
+  if (minutes < 10) {
+  minute = `0${minutes}`;
+}
   let year = now.getFullYear();
 
   let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
