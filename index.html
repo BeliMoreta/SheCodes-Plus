@@ -68,6 +68,14 @@
         font-family: "Chivo", sans-serif;
         color: rgb(0, 0, 0);
       }
+
+      h6 {
+        text-align: center;
+        font-family: "Chivo", sans-serif;
+        color: rgb(0, 0, 0);
+
+      }
+
       .minMax {
         text-align: center;
         font-family: "Chivo", sans-serif;
@@ -194,10 +202,13 @@
         <h5>
           Mon
           <br />
-          ☁
-          <br />
         </h5>
          
+        <h6>
+          <img src="" alt="Clear" id="icon2" class="float-center" width="35" height="35"/>
+        </h6>
+
+
         <div class="minMax">
           <tr>
             <td>4°<span id="min"></span></td>
@@ -278,7 +289,7 @@ let now = new Date();
     h4.innerHTML = `<hr> ${day} | ${month}  ${date} | ${hours}:${minutes}
             <hr>`;
 
-    h5.innerHTML = `${day} <br> ☁ <br>`;
+    h5.innerHTML = `${day}`;
 
 function search(event) {
     event.preventDefault();
@@ -320,7 +331,9 @@ function showTemperature(response) {
   let pressure = Math.round(response.data.main.pressure);
   let pressureElement = document.querySelector("#pressure");
   let iconElement = document.querySelector("#icon")
+  let littleIconElement = document.querySelector("#icon2")
 
+  littleIconElement.setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
   iconElement.setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
   h3.innerHTML = response.data.name;
   pressureElement.innerHTML = `${pressure}`;
