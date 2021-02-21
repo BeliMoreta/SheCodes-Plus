@@ -160,7 +160,7 @@
           <br />
           <span class="description" id="temperature-description">Cloudy</span>
           <div class="icono">
-            ☁
+            <img src="" alt="Clear" id="icon" class="float-center" />
             <br />
             <br />
           </div>
@@ -319,6 +319,9 @@ function showTemperature(response) {
   let humidityElement = document.querySelector("#humidity");
   let pressure = Math.round(response.data.main.pressure);
   let pressureElement = document.querySelector("#pressure");
+  let iconElement = document.querySelector("#icon")
+
+  iconElement.setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
   h3.innerHTML = response.data.name;
   pressureElement.innerHTML = `${pressure}`;
   humidityElement.innerHTML = `${humidity}`;
