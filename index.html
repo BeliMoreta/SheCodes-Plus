@@ -170,6 +170,7 @@
         size: 10px;
         font-family: "Chivo", sans-serif;
       }
+
       button {
         display: block;
         text-align: center;
@@ -263,8 +264,6 @@
         <div class=forecastWeather>
           <div class="row forecast" id="forecast">
         </div>
-        
-
         </div>
     
 
@@ -317,6 +316,8 @@ function search(event) {
     searchCity(searchInput.value);
 }
 
+//Time//
+
 function formatHours(timestamp) {
 
   let date = new Date(timestamp);
@@ -332,6 +333,7 @@ return `${hours}:${minutes}`;
 }
 
 //Forecast//
+
 function showForecast(response){
 let forecastElement = document.querySelector("#forecast");
 forecastElement.innerHTML = null;
@@ -366,7 +368,7 @@ function searchCity(city) {
   axios.get(apiUrl2).then(showForecast);
 }
 
-
+//City//
 
 searchCity("Madrid")
 
@@ -375,7 +377,7 @@ form.addEventListener("submit", search);
 
 
 
-//Api
+//Terperature Elements//
 
 function showTemperature(response) {
   console.log(response.data);
