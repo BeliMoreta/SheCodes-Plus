@@ -123,6 +123,7 @@
       .icono {
         font-size: 70px;
       }
+
       .frame {
         display: block;
         text-align: center;
@@ -156,7 +157,7 @@
         max-width: 450px;
       }
 
-      .col {
+      .forecast {
         font-size: 20px;
         padding-bottom: 20px;
         font-family: "Chivo", sans-serif;
@@ -185,6 +186,7 @@
       .description {
         text-transform: capitalize;
       }
+
     </style>
   </head>
   <body>
@@ -258,45 +260,13 @@
         </div>
          
         <br>
-        <div class="forecast">
-        <div class="row 3">
-          <div class="col 7">
-            Mon
-            <br />
-            ☁
-            <br />
-            4°/-8°
-          </div>
-          <div class="col 8">
-            Tue
-            <br />
-            ⛅
-            <br />
-            4°/-11°
-          </div>
-          <div class="col 9">
-            Wed
-            <br />
-            ⛅
-            <br />
-            6°/2°
-          </div>
-          <div class="col 10">
-            Thu
-            <br />
-            ☁
-            <br />
-            7°/0
-          </div>
-          <div class="col 11">
-            Fri
-            <br />
-            ☁
-            <br />
-            5°/-1°
-          </div>
+        <div class=forecastWeather>
+          <div class="row forecast" id="forecast">
         </div>
-      </div>
+        
+
+        </div>
+    
 
       </div>
     </section>
@@ -347,11 +317,56 @@ function search(event) {
     searchCity(searchInput.value);
 }
 
+function formatHours(timestamp) {
+
+  let date = new Date(timestamp);
+  let hours = date.getHours();
+  let minutes = date.getMinutes();
+  if (minutes < 10) {
+  minutes = `0${minutes}`;
+
+return `${hours}:${minutes}`;
+
+
+}
+}
+
+//Forecast//
+function showForecast(response){
+let forecastElement = document.querySelector("#forecast");
+forecastElement.innerHTML = null;
+let forecast = null;
+
+for (let index = 0; index <6; index++) {
+  let forecast = response.data.list[index];
+  forecastElement.innerHTML += `
+
+<div class="col 1">
+            ${formatHours(forecast.dt * 1000)}
+            <br />
+            <img
+            src="http://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png"
+            alt=""
+            />
+            <br />
+            ${Math.round(forecast.main.temp_min)}°/${Math.round(forecast.main.temp_max)}°
+          </div>`;
+
+}
+}
+
+//Forecast//
+
 function searchCity(city) {
   let apiKey = "829fcd3105a3bc78b07b8b3c45973e5b";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric`;
-  axios.get(`${apiUrl}&appid=${apiKey}`).then(showTemperature);
+  let apiUrl1 = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric`;
+  axios.get(`${apiUrl1}&appid=${apiKey}`).then(showTemperature);
+
+  let apiUrl2 = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl2).then(showForecast);
 }
+
+
 
 searchCity("Madrid")
 
