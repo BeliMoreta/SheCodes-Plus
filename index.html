@@ -13,29 +13,42 @@
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <title>Weather App</title>
     <style>
-    body {
+   /* body {
       font-family: "Comfortaa", cursive, sans-serif;
       background-image: url(https://images.pexels.com/photos/220201/pexels-photo-220201.jpeg?auto=compress&cs=tinysrgb&h=650&w=940);
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center;
-}
+}*/
       h1 {
         display: block;
         text-align: center;
         font-weight: bolder;
-        color: aliceblue;
+        color: rgb(0, 0, 0);
         font-family: "Chivo", sans-serif;
         border: rgb(97, 93, 93) 1px solid;
         max-width: 300px;
+        min-width: 300px;
         border-radius: 10px;
         margin: 0 auto;
-        padding-top: 60px;
+        padding-top: 1cm;
         padding-bottom: 1px;
-        background-color: #20204d;
+        background-color: #ffffff;
+        opacity: 0.85;
       }
-      
-      h2 {
+      .details {
+        display: block;
+        list-style-type: none;
+        text-align: center;
+        font-weight: lighter;
+        font-family: "Chivo", sans-serif;
+        font-size: 15px;
+        padding-left: 0.5cm;
+        padding-right: 1.5cm;
+        color: rgb(3, 3, 3);
+      }
+
+      /*h2 {
         display: block;
         text-align: center;
         font-weight: lighter;
@@ -49,10 +62,11 @@
         border: rgb(97, 93, 93) 1px solid;
         background-color: #96a1c0;
         border-radius: 10px;
-      }
+      }*/
+
       ul {
         list-style-type: none;
-        text-align: left;
+        /*text-align: center;*/
       }
       
       h3 {
@@ -104,6 +118,23 @@
       .icono {
         font-size: 70px;
       }
+      .frame {
+        display: block;
+        text-align: center;
+        font-weight: lighter;
+        font-family: "Chivo", sans-serif;
+        font-size: 20px;
+        padding-top: 1cm;
+        padding-bottom: 1cm;
+        max-width: 400px;
+        min-width: 400px;
+        margin: 0 auto;
+        color: rgb(3, 3, 3);
+        border: rgb(97, 93, 93) 1px solid;
+        background-color: #96a1c0;
+        border-radius: 10px;
+        background-image: url(https://images.pexels.com/photos/220201/pexels-photo-220201.jpeg?auto=compress&cs=tinysrgb&h=650&w=940);
+}
 
       .app {
         display: block;
@@ -112,9 +143,8 @@
         max-width: 500px;
         margin: 0 auto;
         border: rgb(97, 93, 93) 5px solid;
-        background-image: linear-gradient(to top, #fafafa 0%, #a6c2eb 100%);
+        background-image: linear-gradient(to top, #c7eaf0 0%, #a3acd6 100%);
         border-radius: 10px;
-        opacity: 0.85;
       }
 
       hr {
@@ -170,32 +200,29 @@
         id="currentButton">Current location
       </button>
 
+      <div class="frame">
         <h1>
           <div class="degrees">
             <span class="temperature" id="temperature">3°C</span>
           </div>
-          <br />
           <span class="description" id="temperature-description">Cloudy</span>
           <div class="icono">
             <img src="" alt="Clear" id="icon" class="float-center" />
             <br />
-            <br />
+            <div class="details">
+              <ul>
+                <li><b>Feels like: </b><span id="feels"></span>°C</li>
+                <li><b>Wind: </b><span id="wind"> </span> km/h</li>
+                <li><b>Humidity: </b><span id="humidity"></span>%</li>
+                <li><b>Pressure: </b><span id="pressure"> </span> Pa%</li>
+              </ul>
+            </div>
           </div>
         </h1>
 
-        <br />
-        <br />
-
         <h2>
-          <div class="details">
-            <ul>
-              <li><b>Feels like: </b><span id="feels"></span>°C</li>
-              <li><b>Wind: </b><span id="wind"> </span> km/h</li>
-              <li><b>Humidity: </b><span id="humidity"></span>%</li>
-              <li><b>Pressure: </b><span id="pressure"> </span> Pa%</li>
-            </ul>
-          </div>
         </h2>
+      </div>
 
         <h3>
           <br />
