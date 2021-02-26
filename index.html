@@ -252,8 +252,8 @@
 
         <div class="minMax">
           <tr>
-            <td>4°<span id="min"></span></td>
-            <td>-8°<span id="max"></span></td>
+            <span class="minTemperature" id="min">4</span>
+            <span class="maxTemperature" id="max">8</span>
         </tr>
         </div>
          
@@ -374,9 +374,15 @@ function showTemperature(response) {
   let humidityElement = document.querySelector("#humidity");
   let pressure = Math.round(response.data.main.pressure);
   let pressureElement = document.querySelector("#pressure");
-  let iconElement = document.querySelector("#icon")
-  let littleIconElement = document.querySelector("#icon2")
+  let iconElement = document.querySelector("#icon");
+  let littleIconElement = document.querySelector("#icon2");
+  let min = Math.round(response.data.main.temp_min);
+  let minElement = document.querySelector("#min");
+  let max = Math.round(response.data.main.temp_max);
+  let maxElement = document.querySelector("#max");
 
+  maxElement.innerHTML = `${max}°`;
+  minElement.innerHTML = `${min}° /`;
   littleIconElement.setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
   iconElement.setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
   h3.innerHTML = response.data.name;
