@@ -105,7 +105,7 @@
         text-align: center;
         font-family: "Chivo", sans-serif;
         color: rgb(0, 0, 0);
-        font-size: 20px;
+        font-size: 30px;
       }
 
       input {
@@ -120,7 +120,7 @@
         font-size: 20px;
       }
 
-      .icono {
+      .icon {
         font-size: 70px;
       }
 
@@ -157,12 +157,6 @@
         max-width: 450px;
       }
 
-      .forecast {
-        font-size: 20px;
-        padding-bottom: 20px;
-        font-family: "Chivo", sans-serif;
-      }
-
       .searcher {
         text-align: center;
         color: rgb(0, 0, 0);
@@ -187,6 +181,15 @@
       .description {
         text-transform: capitalize;
       }
+      .col1 {
+        font-size: 0.5cm;
+        text-align: center;
+        margin: auto;
+        font-size: 20px;
+        font-family: "Chivo", sans-serif;
+  
+}
+
 
     </style>
   </head>
@@ -259,10 +262,13 @@
             <span class="maxTemperature" id="max">8</span>
         </tr>
         </div>
+
+        <hr>
          
         <br>
         <div class=forecastWeather>
           <div class="row forecast" id="forecast">
+            <img src="" alt="Clear" id="icon2" class="float-center" width="35" height="35"/>
         </div>
         </div>
     
@@ -347,21 +353,18 @@ for (let index = 0; index <6; index++) {
   let forecast = response.data.list[index];
   forecastElement.innerHTML += `
 
-<div class="col 1">
+<div class="col1">
             ${formatHours(forecast.dt * 1000)}
             <br />
-            <img
-            src="http://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png"
-            alt=""
-            />
+            <img src="http://openweathermap.org/img/wn/${forecast.weather[0].icon}@2x.png" alt="Clear" id="icon2" class="float-center" width="35" height="35"/>
             <br />
-            ${Math.round(forecast.main.temp_min)}°/${Math.round(forecast.main.temp_max)}°
+            ${Math.round(forecast.main.temp_min)}°/<b>${Math.round(forecast.main.temp_max)}°<b>
           </div>`;
 
 }
 }
 
-//Forecast//
+//City//
 
 function searchCity(city) {
   let apiKey = "829fcd3105a3bc78b07b8b3c45973e5b";
@@ -371,8 +374,6 @@ function searchCity(city) {
   let apiUrl2 = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl2).then(showForecast);
 }
-
-//City//
 
 searchCity("Madrid")
 
@@ -404,7 +405,7 @@ function showTemperature(response) {
   let max = Math.round(response.data.main.temp_max);
   let maxElement = document.querySelector("#max");
 
-  maxElement.innerHTML = `${max}°`;
+  maxElement.innerHTML = `<b>${max}°<b>`;
   minElement.innerHTML = `${min}° /`;
   littleIconElement.setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
   iconElement.setAttribute("src", `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`);
