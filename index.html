@@ -435,27 +435,6 @@ celsiusTemperature = response.data.main.temp;
   temperatureElement.innerHTML = `${temperature}`;
   description.innerHTML = response.data.weather[0].description;
 }
-
- function searchLocation(position) {
-  let apiKey = "829fcd3105a3bc78b07b8b3c45973e5b";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${
-    position.coords.latitude
-  }&lon=${position.coords.longitude}&appid=${apiKey}&units=metric`;
-
-  axios.get(apiUrl).then(showTemperature);
-  apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${apiKey}&units=metric`;
-  axios.get(apiUrl).then(showForecast);
-}
-
-function getCurrentLocation(event){
-event.preventDefault();
-navigator.geolocation.getCurrentPosition(searchLocation);
-}
-
-let currentLocationButton = document.querySelector("#currentButton");
-currentLocationButton.addEventListener("click", getCurrentLocation);
-
-
 //Celsius/fahrenheit//
 
 function showFahrenheitTemperature(event) {
@@ -486,6 +465,25 @@ fahrenheitLink.addEventListener("click", showFahrenheitTemperature);
 
 let celsiusLink = document.querySelector("#celsius-link");
 celsiusLink.addEventListener("click", showCelsisusTemperature);
+
+ function searchLocation(position) {
+  let apiKey = "829fcd3105a3bc78b07b8b3c45973e5b";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${
+    position.coords.latitude
+  }&lon=${position.coords.longitude}&appid=${apiKey}&units=metric`;
+
+  axios.get(apiUrl).then(showTemperature);
+  apiUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${apiKey}&units=metric`;
+  axios.get(apiUrl).then(showForecast);
+}
+
+function getCurrentLocation(event){
+event.preventDefault();
+navigator.geolocation.getCurrentPosition(searchLocation);
+}
+
+let currentLocationButton = document.querySelector("#currentButton");
+currentLocationButton.addEventListener("click", getCurrentLocation);
 
 
     </script>
